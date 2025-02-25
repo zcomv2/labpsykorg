@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>My JanusVR Room</title>
+	 <script src="https://cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+	 <!-- Incluimos la librería GLTFLoader.js -->
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+ <!--<script> src="https://korman.es/janus/pistola.js"></script>-->
+<!--<script src="disparo.js"></script>-->
+  </head>
+  <body>
+    <script src="https://web.janusvr.com/janusweb.js"></script>
+
+    <janus-viewer>
+      <FireBoxRoom>
+<Assets>
+  <AssetObject id="pistola45" src="./pistola/pistola45.obj" mtl="./pistola/pistola45.mtl" />
+
+  <AssetObject id="trees1" src="trees1.obj" mtl="trees1.mtl" />
+<!--  <AssetObject id="treesall" src="treesall.obj" mtl="trees1.mtl" />-->
+  <AssetImage id="img1" src="sphere.gif" ></AssetImage>
+  <AssetImage id="img2" src="info3.png"></AssetImage>
+  <AssetImage id="img3" src="loading.gif"></AssetImage>
+   <AssetObject id="ayuntamiento" src="ayuntamiento1.obj" mtl="ayuntamiento1.mtl" />
+   <AssetObject id="edificio1" src="edificio1.obj" mtl="edificio1.mtl" />
+   <AssetObject id="edificio2" src="edificio2.obj" mtl="edificio2.mtl" />
+   <AssetObject id="bbq" src="bbq.obj" mtl="bbq.mtl" />
+   <AssetObject id="medicine" src="medicine.obj" mtl="medicine.mtl" />
+   <AssetObject id="energy2" src="energy2.obj" mtl="energy2.mtl" />
+   <AssetObject id="medicine2" src="medicine2.obj" mtl="medicine2.mtl" />
+   <AssetObject id="edificio3" src="edificio3.obj" mtl="edificio3.mtl" />
+   <AssetObject id="edificio4" src="edificio4.obj" mtl="edificio4.mtl" />
+   <AssetObject id="edificio5" src="edificio5.obj" mtl="edificio5.mtl" />
+   <AssetObject id="medicine6" src="medicine6.obj" mtl="medicine6.mtl" />
+   <AssetObject id="edificio7" src="edificio7.obj" mtl="edificio7.mtl" />
+   <AssetObject id="edificio8" src="edificio8.obj" mtl="edificio8.mtl" />
+   <AssetObject id="edificio9" src="edificio9.obj" mtl="edificio9.mtl" />
+   <AssetObject id="edificio10" src="edificio10.obj" mtl="edificio10.mtl" />
+  
+   <AssetObject id="plaza" src="plaza1.obj" mtl="plaza1.mtl" />
+
+
+
+ </Assets>
+        <Room use_local_asset="room_plane" walk_speed="5" col="#8A8A8A">
+          <Link pos="0 0 10" url="https://korman.es/janus2/" scale="1.8 3.2 1" thumb_id="img1" title="Mision To Minerva" ></Link>
+          <Link pos="0 0 3" thumb_id="img2" ></Link>
+	  <Link pos="2 0 3" thumb_id="img3" ></Link>
+
+	  <Object pos="0 0 5"  id="ayuntamiento" />
+	  <Object pos="0 0 2"  id="edificio1" />
+	  <Object pos="0 0 2"  id="edificio2" />
+          <Object pos="0 0 3"  id="bbq" />
+	  <Object pos="0 0 3"  id="medicine" />
+          <Object pos="0 0 3"  id="energy2" />
+          <Object pos="0 0 3"  id="medicine2" />
+
+          <Object pos="0 0 0"  id="medicine5" />
+          <Object pos="0 0 0"  id="edificio3" />
+          <Object pos="0 0 0"  id="edificio4" />
+          <Object pos="0 0 0"  id="edificio5" />
+	  <Object pos="0 0 0"  id="edificio6" />
+          <Object pos="0 0 0"  id="edificio7" />
+          <Object pos="0 0 0"  id="edificio8" />
+          <Object pos="0 0 0"  id="edificio9" />
+          <Object pos="0 0 0"  id="plaza" />
+          <Object pos="0 0 0"  id="edificio10" />
+  
+<!--          <Object pos="0 0 0"  id="treesall" />-->
+	  <Object pos="95 0 -30"  id="trees1" />
+	  <Object pos="85 0 -40"  id="trees1" />
+	  <Object pos="85 0 -25"  id="trees1" />
+	  <Object pos="85 0 -50"  id="trees1" /> 
+          <Object pos="85 0 -60"  id="trees1" /> 
+          <Object pos="85 0 -70"  id="trees1" /> 
+          <Object pos="85 0 -80"  id="trees1" />
+          <Object pos="85 0 -90"  id="trees1" /> 
+          <Object pos="85 0 -100"  id="trees1" /> 
+ 
+
+<!--	   <Image id="img1" pos="0 1 6" ></Image>-->
+<!--	  <Object pos="0 1 4"  id="pistola45" />-->
+        </Room>
+      </FireBoxRoom>
+    </janus-viewer>
+
+  </body>
+</html>

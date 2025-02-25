@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore our web applications in development, focused on creating a crypto ecosystem and autonomous services.">
+  <meta name="author" content="Albert Korman">
+  <link rel="icon" href="https://lab.psy-k.org/fotos/sphere-K.gif" type="image/gif">
+  <!-- Otros meta tags... -->
+  <title>Korman Online Labs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+  body {
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: white;
+    font-family: Arial, sans-serif;
+    padding-top: 70px;
+  }
+  .jumbotron {
+  padding: 4rem 2rem;
+  text-align: center;
+  min-height: 400px; /* Altura mínima para que la animación sea visible */
+  }
+  .jumbotron h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .card {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+  }
+  .card-img-top {
+    object-fit: cover;
+    max-height: 225px;
+  }
+  .fixed-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  @media (max-width: 991.98px) {
+    .fixed-navbar .navbar-collapse {
+      background: rgba(0, 0, 0, 0.9);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+    }
+  }
+  .logo-custom {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 576px) {
+    .logo-custom {
+      max-width: 200px;
+    }
+  }
+  @media (max-width: 768px) and (min-width: 577px) {
+    .logo-custom {
+      max-width: 250px;
+    }
+  }
+</style>
+
+
+</head>
+
+  <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="#">Korman Online Labs</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="https://lab.psy-k.org/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#crypto">Crypto & Blockchain</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gaming">Video Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="#development">IT Development</a></li>
+        <li class="nav-item"><a class="nav-link" href="#caracters">Characters</a></li>
+        <li class="nav-item"><a class="nav-link" href="#opensource">Open Source Teams</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="jumbotron text-center position-relative">
+  <canvas id="particleCanvas" class="position-absolute top-0 start-0 w-100 h-100" style="z-index: -1;"></canvas>
+  <h1>Welcome to Korman Online Labs</h1>
+  <p class="lead">A digital innovation lab exploring blockchain, indie games, and open source tools for a decentralized future.</p>
+  <img src="https://lab.psy-k.org/fotos/logo-lab.jpg" alt="Korman Online Labs Logo" class="img-fluid logo-custom mt-4" loading="lazy">
+</header>
+
+<div class="container py-4 text-center">
+  <h2>What We Do</h2>
+  <p class="lead">
+    At Korman Online Labs, we’re dedicated to developing software applications and services that make the technological world more adaptable and user-friendly. Our goal is to create solutions that enhance the experience of every user, keeping in mind the human aspects of technology and its role in driving societal growth. From everyday interactions to the vast virtual landscapes of the internet, we’re shaping tools that empower people and improve lives. We invite everyone to join us in this journey—technical knowledge isn’t required! Often, the simplest user can offer the most valuable ideas for refining interfaces and applications. Together, we can build a better, more intuitive digital experience for all.
+  </p>
+</div>
+
+<!-- Nueva sección de contacto -->
+<div class="container py-4 text-center">
+  <h3 class="mb-3">Contact Us</h3>
+  <ul class="list-inline">
+    <li class="list-inline-item mx-3">
+      <a href="https://github.com/zcomv2/" class="text-white text-decoration-none" target="_blank">
+        <i class="fab fa-github fa-lg me-2"></i>GitHub
+      </a>
+    </li>
+    <li class="list-inline-item mx-3">
+      <a href="https://www.youtube.com/@AlbertKorman" class="text-white text-decoration-none" target="_blank">
+        <i class="fab fa-youtube fa-lg me-2"></i>YouTube
+      </a>
+    </li>
+    <li class="list-inline-item mx-3">
+      <a href="https://discord.gg/5xEPZatd" class="text-white text-decoration-none" target="_blank">
+        <i class="fab fa-discord fa-lg me-2"></i>Discord
+      </a>
+    </li>
+    <li class="list-inline-item mx-3">
+      <a href="https://web.libera.chat/#parati" class="text-white text-decoration-none" target="_blank">
+        <i class="fas fa-comment-dots fa-lg me-2"></i>IRC (Libera.Chat)
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="container py-5" id="ai-tools">
+  <h2 class="text-center">AI Tools I Use</h2>
+  <div class="row mt-4">
+    <div class="col-md-4"><div class="card p-3"><h4>Grok</h4><p>My trusty AI companion created by xAI, perfect for exploring the universe and answering almost any question with a dash of humor.</p><a href="https://xai.com/grok" class="btn btn-primary">Learn more</a></div></div>
+    <div class="col-md-4"><div class="card p-3"><h4>ChatGPT</h4><p>A versatile conversational AI from OpenAI, great for brainstorming, writing, and tackling a wide range of tasks.</p><a href="https://chat.openai.com/" class="btn btn-primary">Learn more</a></div></div>
+    <div class="col-md-4"><div class="card p-3"><h4>Leonardo.AI</h4><p>An amazing tool for generating stunning artwork and creative assets using AI, ideal for my visual projects and 150 free tokens every day..</p><a href="https://leonardo.ai/" class="btn btn-primary">Learn more</a></div></div>
+    <div class="col-md-4"><div class="card p-3"><h4>Kling AI</h4><p>A powerful AI for creating dynamic video content, helping me bring motion to my ideas.</p><a href="https://klingai.com/" class="btn btn-primary">Learn more</a></div></div>
+    <div class="col-md-4"><div class="card p-3"><h4>Suno</h4><p>An AI-driven music creation tool that lets me compose unique tracks effortlessly.</p><a href="https://suno.com/" class="btn btn-primary">Learn more</a></div></div>
+    <div class="col-md-4"><div class="card p-3"><h4>Ollama</h4><p>For running local AI models, including DeepSeek-Coder-V2 for coding and OpenHermes.</p><a href="https://ollama.com/" class="btn btn-primary">Learn more</a></div></div>
+  </div>
+</div>
+
+
+    <div class="container py-5" id="crypto">
+      <h2 class="text-center">Crypto & Blockchain</h2>
+      <div class="row mt-4">
+        <div class="col-md-4"><div class="card p-3"><h4>Kor Token</h4><p>Binance Smart Chain-based token with 10B liquidity.</p><a href="https://korman.es/kor-token/" class="btn btn-primary">Learn more</a></div></div>
+        <div class="col-md-4"><div class="card p-3"><h4>NFTs on OpenSea</h4><p>Unique digital assets for the metaverse.</p><a href="https://opensea.io/AlbertKorman" class="btn btn-primary">Learn more</a></div></div>
+        <div class="col-md-4"><div class="card p-3"><h4>Janus VR</h4><p>Immersive metaverse environment based on WebXR.</p><a href="http://lab.psy-k.org/janus/" class="btn btn-primary">Learn more</a></div></div>
+	
+      </div>
+    </div>
+
+    <div class="container py-5" id="gaming">
+      <h2 class="text-center">Video Games</h2>
+      <div class="row mt-4">
+        <div class="col-md-4"><div class="card p-3"><h4>SpaceShip 3D</h4><p>Space survival game built with Three.js.</p><a href="https://lab.psy-k.org/ship" class="btn btn-primary">Learn more</a></div></div><br/>
+         <div class="col-md-4"><div class="card p-3"><h4>Beyonder js13k</h4><p>Fun abstract videogame JavaScript under 13KB.</p><a href="https://beyonder.psy-k.org/" class="btn btn-primary">Learn more</a></div></div><br/>
+        <div class="col-md-4"><div class="card p-3"><h4>Cypher Tales</h4><p>The Battle for the Liberation CypherCity.</p><a href="https://lab.psy-k.org/tales.html" class="btn btn-primary">Learn more</a></div></div><br/>
+	<div class="col-md-4"><div class="card p-3"><h4>Lingo Heroine</h4><p>Educational and didactic game with an Action PacZel.</p><a href="https://amjp.psy-k.org/lingo-heroine/Play-Lingo-Heroine-HTML5-es.html" class="btn btn-primary">Learn more</a></div></div><br/>
+	 <div class="col-md-4"><div class="card p-3"><h4>Tom Burguer 3</h4><p>A simulator of a burger franchise.</p><a href="https://amjp.psy-k.org/tom-burger//Play-Tom-Burger-HTML5-es.html" class="btn btn-primary">Learn more</a></div></div><br/>
+	 <div class="col-md-4"><div class="card p-3"><h4>Omocha123</h4><p>Physics simulator share your own simulations.</p><a href="https://amjp.psy-k.org/omocha123/omocha123es.html" class="btn btn-primary">Learn more</a></div></div><br/>
+
+	
+      </div>
+    </div>
+
+    <div class="container py-5" id="development">
+      <h2 class="text-center">IT Development</h2>
+      <div class="row mt-4">
+        <div class="col-md-4"><div class="card p-3"><h4>PacoChatXXX</h4><p>Multiplatform chat with IRC and Discord integration.</p><a href="https://pacochat.psy-k.org/" class="btn btn-primary">Learn more</a></div></div><br/>
+        <div class="col-md-4"><div class="card p-3"><h4>SynthK</h4><p>Analog-digital synthesizer with MIDI control.</p><a href="https://lab.psy-k.org/synthk" class="btn btn-primary">Learn more</a></div></div><br/>
+        <div class="col-md-4"><div class="card p-3"><h4>LiveChat Messenger</h4><p>Real-time web-based text chat application.</p><a href="https://livechat.psy-k.org/" class="btn btn-primary">Learn more</a></div></div><br/>
+        <div class="col-md-4"><div class="card p-3"><h4>AI Chatbot</h4><p>Chatbot powered by LLM-based artificial intelligence.</p><a href="https://chatbot.psy-k.org/" class="btn btn-primary">Learn more</a></div></div><br/>
+        <div class="col-md-4"><div class="card p-3"><h4>Docker Hub</h4><p>Docker containers for applications and services.</p><a href="https://hub.docker.com/u/zcomv2/" class="btn btn-primary">Learn more</a></div></div><br/>
+	 <div class="col-md-4"><div class="card p-3"><h4>Aracne Net Bug</h4><p>Cyber Tool to dismantle digital tyranny.</p><a href="https://lab.psy-k.org/aracne.html" class="btn btn-primary">Learn More</a></div></div><br/>
+        <div class="col-md-4"><div class="card p-3"><h4>Debian 12 Liveram Retro Gaming Edition</h4><p>Live Debian 12 with LXDE, PCSX2 emulator, and PlayStation BIOS.</p><a href="https://sourceforge.net/projects/deb12-allinone-liveram-saludos/" class="btn btn-primary">Learn More</a></div></div><br/>
+        <div class="col-md-4"><div class="card p-3"><h4>Debian 12 LiveDVD AllInOne SaludOS</h4><p>Customized Debian 12 distribution for Spanish Linux users.</p><a href="https://sourceforge.net/projects/deb12-allinone-liveram-saludos/" class="btn btn-primary">Learn More</a></div></div><br/>
+	<div class="col-md-4"><div class="card p-3"><h4>🌰 Amalo, the Squirrel of Secret Fruits 🌳</h4><p>Amalo, the Squirrel of Secret Fruits, unknowingly reforested an entire region.</p><a href="https://lab.psy-k.org/amalo.html" class="btn btn-primary">Learn More</a></div></div><br/>
+	<div class="col-md-4"><div class="card p-3"><h4>Black Octopus The Shadow</h4><p>He lives in the depths of the ocean and in the clouds of the sky, he is Black Octopus.</p><a href="https://lab.psy-k.org/bo.html" class="btn btn-primary">Learn More</a></div></div><br/>	
+	<div class="col-md-4"><div class="card p-3"><h4>Debian 12 BlindOS 1.02</h4><p>Debian 12 distribution with BlindOS interface for the blind.</p><a href="https://sourceforge.net/projects/blindos/" class="btn btn-primary">Learn More</a></div></div><br/>
+	<div class="col-md-4"><div class="card p-3"><h4>Github Profile</h4><p>Backup of Codes of programing Apps and Services. Collaborate with us.</p><a href="https://github.com/zcomv2/" class="btn btn-primary">Learn More</a></div></div><br/>
+
+     </div>
+    </div>
+
+<!-- Sección Album con la misma animación de partículas del header -->
+<section class="py-5 text-center container position-relative">
+  <canvas id="particleCanvasAlbum" class="position-absolute top-0 start-0 w-100 h-100" style="z-index: -1;"></canvas>
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light" id="caracters">Album of Sc-Fi<br/>&<br/>Cypher Punk</h1>
+      <p class="fw-light" style="color:white;">Collection of characters and adventures from the worlds and dimensions of Korman.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function initParticleCanvas(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      
+      function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      const particlesArray = [];
+      const numberOfParticles = 50;
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 5 + 1;
+          this.speedX = Math.random() * 1 - 0.5;
+          this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+          if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+        }
+        draw() {
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+
+      function connectParticles() {
+        for (let a = 0; a < particlesArray.length; a++) {
+          for (let b = a; b < particlesArray.length; b++) {
+            let dx = particlesArray[a].x - particlesArray[b].x;
+            let dy = particlesArray[a].y - particlesArray[b].y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 100) {
+              ctx.strokeStyle = `rgba(0, 255, 255, ${1 - distance / 100})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+              ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+        }
+        connectParticles();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+    
+    initParticleCanvas('particleCanvasAlbum');
+  });
+</script>
+
+
+ <div class="pt-5 my-5 text-body-secondary border-top">
+    <div class="container">
+<center>
+<h5>In short, the Concept::</br></br>
+CypherPunk (Rebel encryption)</br></br>
+This comes to say this:<br/></br>
+“The Cypherpunks will create the necessary programs. </br>
+Because they are aware that someone has to defend privacy, </br>
+and given that it's about their privacy, </br>
+They will be the ones to write them.</br>
+The Cypherpunks will disseminate their programs so that they</br>
+Less experienced Cypherpunks can practice and play with them. </br>
+The Cypherpunks are aware that security is not achieved in one day and they are patient.</br>
+The Cypherpunks don't care if the software they write is liked or not. </br>
+The Cypherpunks know that software is indestructible and free.</br>
+The Cypherpunks know that a highly dispersed system cannot be eliminated because it is decentralized.</br>
+The Cypherpunks make networks secure.”</br>
+By Unknow</h5>
+<br/><br/><br/>
+<p>
+<h3>Definition of Cypherpunk</h3>
+Cypherpunks are a Digital Life Race, an evolution of the cyberpunk movement that has refined its focus on security, privacy, and continuous software improvement. They differentiate themselves from traditional cyberpunks through their discipline and precision: "They sharpen the katana more", meaning they do not just create, but optimize, patch, and reinforce code to make it more efficient, secure, and accessible.
+
+Cypherpunks are specialists in polishing code, enhancing application performance, and ensuring the integrity of digital information. Their work revolves around securing interfaces as safe communication channels, preventing censorship, surveillance, and vulnerabilities that could compromise privacy.
+
+Committed to the freedom of knowledge, Cypherpunks believe in teaching and sharing wisdom. They do not seek profit but rather collective progress, distributing their developments under GPL and public-use licenses. They understand that security and privacy are not achieved overnight, so they continuously practice, experiment, and refine their craft.
+
+Cypherpunks do not care whether the software they create is accepted or understood by everyone. They know that code is indestructible and free. In an increasingly centralized digital world, their existence is crucial: their code and distributed networks are the last hope for truly free and high-quality information.
+
+Cypherpunks make networks secure. 🚀
+</p>
+</center>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/luna-kobra.png" class="bd-placeholder-img card-img-top" width="100%" 
+height="225" >
+            <div class="card-body">
+              <p class="card-text">Here we see Luna Kobra Special Super Agent, ready to embark on a graphic adventure she will never forget.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.youtube.com/watch?v=doO8JZ7aY4I"   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">3 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/Neons.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">These are Zero and his Freedom Team, they are near an Energy Center and/or Silicon Constructions.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.korman.es"   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">5 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/Kormanstein.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">Dr. Kormanstein is a Mad Scientist of advanced Mind and Technology, sound, and Music and IT for You and beyonder!.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.youtube.com/watch?v=NnikxGPnn4M"   <button type="button" 
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">7 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/Titania.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">She is Titania Storm, a close friend of Luna Kobra and a companion in missions and tasks. They work very well as a team, and when they join forces with Zero and A.K., the result is explosive!</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.youtube.com/watch?v=2FPAEaakHEk"   <button type="button"
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">8:10 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/ok-voy.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">These are OkVoy99777. It's a robot-or but can replicate itself and create millions of copies and run them, a code of random/logic-digital possibilities and functions and tasks</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.youtube.com/watch?v=d20OVgkGDFA"   <button type="button"
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/KOR.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">He is BlacKOR. An abstract beast that lives and exists among the networks and systems of the entire World Wide Web and beyond. It's a life form of abstract logic and mathematics.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.youtube.com/watch?v=-AAm1erVS78"   <button type="button"
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">12:44 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/matroda.png" class="bd-placeholder-img card-img-top" width="100%" height="225" >
+            <div class="card-body">
+              <p class="card-text">Matroda 25: a girl with rhythm and rhythmic melodies in her harmony.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.youtube.com/watch?v=x-Jbif4Uz8o"
+<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">8 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/Bos.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">He is Black Octopus, a being who lives behind the clouds and in the depths of the Sea. BO .</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.youtube.com/watch?v=aPVCkAZRTBg"   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/sofia.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">They are SophIA & LucIA, a little AI of good practices, ask her what you can learn from her.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://chatbot.psy-k.org/"   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">12 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+</div>
+<!-- Second album -->
+
+<!-- Sección Open-Source Teams con la misma animación de partículas del header -->
+<section class="py-5 text-center container position-relative">
+  <canvas id="particleCanvasOpenSource" class="position-absolute top-0 start-0 w-100 h-100" style="z-index: -1;"></canvas>
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light" id="opensource">Colection Open-Source Teams</h1>
+      <p class="fw-light" style="color:white;">Collection of Teams, Systems, and other Open Source Commands.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function initParticleCanvas(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      
+      function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      const particlesArray = [];
+      const numberOfParticles = 50;
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 5 + 1;
+          this.speedX = Math.random() * 1 - 0.5;
+          this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+          if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+        }
+        draw() {
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+
+      function connectParticles() {
+        for (let a = 0; a < particlesArray.length; a++) {
+          for (let b = a; b < particlesArray.length; b++) {
+            let dx = particlesArray[a].x - particlesArray[b].x;
+            let dy = particlesArray[a].y - particlesArray[b].y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 100) {
+              ctx.strokeStyle = `rgba(0, 255, 255, ${1 - distance / 100})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+              ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+        }
+        connectParticles();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+    
+    initParticleCanvas('particleCanvasAlbum');
+    initParticleCanvas('particleCanvasOpenSource');
+  });
+</script>
+
+
+
+ <div class="pt-5 my-5 text-body-secondary border-top">
+    <div class="container">
+<!--<center>
+<h5>En resumidas palabras el Concepto:</br></br>
+CypherPunk (Cifrado Rebelde)</br></br>
+Viene a decir esto:<br/></br>
+“Los Cypherpunks crearán los programas necesarios. </br>
+Porque son conscientes de que alguien tiene que defender la privacidad, </br>
+y dado que se trata de su privacidad, </br>
+serán ellos quienes los escriban. </br>
+Los Cypherpunks divulgarán sus programas para que los</br>
+Cypherpunks menos expertos puedan practicar y jugar con ellos. </br>
+Los Cypherpunks son conscientes de que la seguridad no se consigue en un día y son pacientes.</br>
+A los Cypherpunks no les preocupa si gusta o no el software que escriben. </br>
+Los Cypherpunks saben que el software es indestructible y Libre. </br>
+Los Cypherpunks saben que un sistema muy disperso no puede ser eliminado porque esta descentralizado.</br>
+Los Cypherpunks hacen que las redes sean seguras.”</br>
+By Anónimo.</h5>
+</center>-->
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/KDE.png" class="bd-placeholder-img card-img-top" width="100%" 
+height="225" >
+            <div class="card-body">
+              <p class="card-text">The K in KDE, this is one of the best Desktop Environments, a bit heavy but powerful.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://kde.org/"   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">3 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/debian.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">From the union of Debora and Ian, Debian The Universal Free Operating System was born.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.debian.org/CD/live/"   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">5 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/ipfire.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">IPFire Router/Firewall Network Services, very comprehensive and secure, operating in various modes..</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://www.ipfire.org/"   <button type="button" 
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">7 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/metamask.jpg" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">Metamask for making donations to open-source teams.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://metamask.io/"   <button type="button"
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">8:10 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/wikipedia.png" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">Wikipedia Wikimedia, one of the best sources of global information overall.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://meta.wikimedia.org/wiki/Logo/History"   <button type="button"
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <img src="https://lab.psy-k.org/fotos/wordpress.jpg" class="bd-placeholder-img card-img-top" width="100%"
+height="225" >
+            <div class="card-body">
+              <p class="card-text">Wordpress is one of the best platforms for Web Blog and Woocommerce.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+               <a href="https://wordpress.org/"   <button type="button"
+class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                <small class="text-body-secondary">12:44 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+<center>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+  <div class="container">
+    <h5 class="mb-3">Connect with Korman Online Labs</h5>
+    <ul class="list-inline">
+      <li class="list-inline-item mx-3">
+        <a href="https://github.com/zcomv2/" class="text-white text-decoration-none" target="_blank">
+          <i class="fab fa-github fa-lg me-2"></i>GitHub
+        </a>
+      </li>
+      <li class="list-inline-item mx-3">
+        <a href="https://www.youtube.com/@AlbertKorman" class="text-white text-decoration-none" target="_blank">
+          <i class="fab fa-youtube fa-lg me-2"></i>YouTube
+        </a>
+      </li>
+      <li class="list-inline-item mx-3">
+        <a href="https://discord.gg/5xEPZatd" class="text-white text-decoration-none" target="_blank">
+          <i class="fab fa-discord fa-lg me-2"></i>Discord
+        </a>
+      </li>
+      <li class="list-inline-item mx-3">
+        <a href="https://web.libera.chat/#parati" class="text-white text-decoration-none" target="_blank">
+          <i class="fas fa-comment-dots fa-lg me-2"></i>IRC (Libera.Chat)
+        </a>
+      </li>
+    </ul>
+    <p class="mt-3">Created by the Bootstrap team &middot; &copy; &middot; Modified by Korman Digital Media Solutions 2025</p>
+  </div>
+</footer>
+<script>
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Ajustar el tamaño del canvas al contenedor
+  function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  // Configuración de partículas
+  const particlesArray = [];
+  const numberOfParticles = 50;
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 5 + 1;
+      this.speedX = Math.random() * 1 - 0.5;
+      this.speedY = Math.random() * 1 - 0.5;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+      if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+    }
+    draw() {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Crear partículas
+  for (let i = 0; i < numberOfParticles; i++) {
+    particlesArray.push(new Particle());
+  }
+
+  // Conectar partículas cercanas
+  function connectParticles() {
+    for (let a = 0; a < particlesArray.length; a++) {
+      for (let b = a; b < particlesArray.length; b++) {
+        let dx = particlesArray[a].x - particlesArray[b].x;
+        let dy = particlesArray[a].y - particlesArray[b].y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 100) {
+          ctx.strokeStyle = `rgba(0, 255, 255, ${1 - distance / 100})`; // Neón cian
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+          ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  // Animación
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particlesArray.length; i++) {
+      particlesArray[i].update();
+      particlesArray[i].draw();
+    }
+    connectParticles();
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
+<script src="//code.tidio.co/a7yjspvs0ijk5qu5ddniuafjwkyxcq6l.js" async></script>
+
+  </body>
+</html>

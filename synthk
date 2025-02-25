@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynthK with MIDI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.27/build/Midi.min.js"></script>
+    <style>
+        .slider {
+            width: 100%;
+        }
+        .container {
+            color: #ffffff;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="background-color:#4a4a4a;">
+
+<div class="container">
+    <h1>SynthK - Audio Synthesizer with MIDI</h1>
+
+    <h2>MIDI Settings</h2>
+    <label>Tempo (BPM): <input id="tempo" type="number" min="20" max="300" value="128"></label>
+    <label>Loop Length (Bars): <input id="loopBars" type="number" min="1" max="32" value="8"></label>
+    <br><br>
+    <button onclick="startMIDI()">Play MIDI</button>
+    <button onclick="stopSynth()">Stop MIDI</button>
+
+    <h2>Oscillator 1</h2>
+    <label>Frequency: <input id="osc1Freq" type="range" class="slider" min="50" max="2000" value="440"></label>
+    <label>Level: <input id="osc1Mix" type="range" class="slider" min="0" max="1" step="0.01" value="0.5"></label>
+
+    <h2>Oscillator 2</h2>
+    <label>Frequency: <input id="osc2Freq" type="range" class="slider" min="50" max="2000" value="440"></label>
+    <label>Level: <input id="osc2Mix" type="range" class="slider" min="0" max="1" step="0.01" value="0.5"></label>
+
+    <h2>Noise</h2>
+    <label>Level: <input id="noiseMix" type="range" class="slider" min="0" max="1" step="0.01" value="0.5"></label>
+
+    <h2>Filters</h2>
+    <h3>Lowpass Filter</h3>
+    <label>Cutoff Frequency: <input id="lowpassFreq" type="range" class="slider" min="20" max="20000" value="1000"></label>
+    <label>Resonance: <input id="lowpassQ" type="range" class="slider" min="0" max="20" value="1"></label>
+
+    <h3>Highpass Filter</h3>
+    <label>Cutoff Frequency: <input id="highpassFreq" type="range" class="slider" min="20" max="20000" value="500"></label>
+    <label>Resonance: <input id="highpassQ" type="range" class="slider" min="0" max="20" value="1"></label>
+
+    <h2>Amplifier Envelope</h2>
+    <label>Attack: <input id="attack" type="range" class="slider" min="0" max="10" step="0.01" value="0.1"></label>
+    <label>Decay: <input id="decay" type="range" class="slider" min="0" max="10" step="0.01" value="0.1"></label>
+    <label>Sustain: <input id="sustain" type="range" class="slider" min="0" max="1" step="0.01" value="0.5"></label>
+    <label>Release: <input id="release" type="range" class="slider" min="0" max="10" step="0.01" value="0.5"></label>
+</div>
+
+<script>
+    // Oscillators and Noise
+    const osc1 = new Tone.Oscillator("C4", "sawtooth").start();
+    const osc2 = new Tone.Oscillator("C4", "sawtooth").start();
+    const noise = new Tone.Noise("white").start();
+    noise.volume.value = -20;
+
+    // Mixer (Gain nodes)
+    const osc1Gain = new Tone.Gain(0.5);
+    const osc2Gain = new Tone.Gain(0.5);
+    const noiseGain = new Tone.Gain(0.5);
+
+    const mixer = new Tone.Gain();
+    osc1.connect(osc1Gain);
+    osc2.connect(osc2Gain);
+    noise.connect(noiseGain);
+
+    osc1Gain.connect(mixer);
+    osc2Gain.connect(mixer);
+    noiseGain.connect(mixer);
+
+    const envelope = new Tone.AmplitudeEnvelope({
+        attack: 0.1,
+        decay: 0.1,
+        sustain: 0.5,
+        release: 0.5
+    }).toDestination();
+
+    const lowpass = new Tone.Filter(1000, "lowpass");
+    const highpass = new Tone.Filter(500, "highpass");
+
+    mixer.connect(lowpass);
+    lowpass.connect(highpass);
+    highpass.connect(envelope);
+
+    async function startMIDI() {
+        try {
+            const midiResponse = await fetch('seq.mid');
+            const midiData = await midiResponse.arrayBuffer();
+            const midi = new Midi(midiData);
+
+            const tempo = document.getElementById('tempo').value;
+            const loopBars = document.getElementById('loopBars').value;
+
+            Tone.Transport.bpm.value = tempo;
+
+            midi.tracks.forEach(track => {
+                track.notes.forEach(note => {
+                    Tone.Transport.schedule((time) => {
+                        playNote(note.name, note.duration, time);
+                    }, note.time);
+                });
+            });
+
+            Tone.Transport.loop = true;
+            Tone.Transport.loopEnd = `${loopBars}m`;
+            Tone.Transport.start();
+        } catch (error) {
+            console.error("Error loading or processing the MIDI file:", error);
+        }
+    }
+
+    function playNote(note, duration, time) {
+        osc1.frequency.value = Tone.Frequency(note).toFrequency();
+        osc2.frequency.value = Tone.Frequency(note).transpose(-12);
+        envelope.triggerAttackRelease(duration, time);
+    }
+
+    function stopSynth() {
+        Tone.Transport.stop();
+        Tone.Transport.cancel();
+    }
+
+    // UI Listeners
+    document.getElementById('osc1Freq').addEventListener('input', (e) => {
+        osc1.frequency.value = e.target.value;
+    });
+
+    document.getElementById('osc2Freq').addEventListener('input', (e) => {
+        osc2.frequency.value = e.target.value;
+    });
+
+    document.getElementById('osc1Mix').addEventListener('input', (e) => {
+        osc1Gain.gain.value = e.target.value;
+    });
+
+    document.getElementById('osc2Mix').addEventListener('input', (e) => {
+        osc2Gain.gain.value = e.target.value;
+    });
+
+    document.getElementById('noiseMix').addEventListener('input', (e) => {
+        noiseGain.gain.value = e.target.value;
+    });
+
+    document.getElementById('lowpassFreq').addEventListener('input', (e) => {
+        lowpass.frequency.value = e.target.value;
+    });
+
+    document.getElementById('lowpassQ').addEventListener('input', (e) => {
+        lowpass.Q.value = e.target.value;
+    });
+
+    document.getElementById('highpassFreq').addEventListener('input', (e) => {
+        highpass.frequency.value = e.target.value;
+    });
+
+    document.getElementById('highpassQ').addEventListener('input', (e) => {
+        highpass.Q.value = e.target.value;
+    });
+
+    document.getElementById('attack').addEventListener('input', (e) => {
+        envelope.attack = e.target.value;
+    });
+
+    document.getElementById('decay').addEventListener('input', (e) => {
+        envelope.decay = e.target.value;
+    });
+
+    document.getElementById('sustain').addEventListener('input', (e) => {
+        envelope.sustain = e.target.value;
+    });
+
+    document.getElementById('release').addEventListener('input', (e) => {
+        envelope.release = e.target.value;
+    });
+</script>
+
+</body>
+</html>

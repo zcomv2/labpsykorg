@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nave Espacial 3D con Música</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Score: 0.000</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/TextureLoader.js"></script>
+    <script>
+        // Reproducir música de fondo
+        const audio = new Audio('./spaceship.mp3');
+        audio.loop = true;  // Hacer que la música se repita en bucle
+        audio.play();       // Iniciar la reproducción del audio
+
+        // Escena, cámara y renderizador
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000); // Fondo negro
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Luz ambiental y direccional
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        let model; // Variable para el modelo
+
+        // Cargar la textura de la nave
+        const textureLoader = new THREE.TextureLoader();
+        const naveTexture = textureLoader.load('./nave.png'); // Usar la textura de la nave que has subido
+
+        // Cargar el modelo GLB (nave.glb)
+        const loader = new THREE.GLTFLoader();
+        loader.load('./nave.glb', function(gltf) {
+            model = gltf.scene;
+
+            // Aplicar la textura al modelo de la nave
+            model.traverse(function (child) {
+                if (child.isMesh) {
+                    child.material.map = naveTexture; // Asignar la textura a todos los Meshes
+                }
+            });
+
+            // Ajustes de escala, posición y rotación inicial
+            model.scale.set(0.1, 0.1, 0.1);  // Ajustar el tamaño si es necesario
+            model.position.set(0, -1, 1);    // Centrar el modelo en la escena
+            model.rotation.y = Math.PI / 2;  // Rotar 90 grados sobre el eje X para que el morro mire hacia el fondo
+            model.rotation.z = Math.PI / 4;
+
+            scene.add(model);
+        }, undefined, function (error) {
+            console.error(error);
+        });
+
+        // Posicionar la cámara
+        camera.position.z = 5;
+
+        // Variables para el movimiento
+        let moveLeft = false;
+        let moveRight = false;
+        const speed = 0.05;
+
+        // Score variables
+        let score = 0;
+        const scoreDisplay = document.getElementById('score');
+
+        // Detectar las teclas presionadas
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'ArrowLeft') {
+                moveLeft = true;
+            } else if (event.code === 'ArrowRight') {
+                moveRight = true;
+            }
+        });
+
+        // Detectar cuando se sueltan las teclas
+        document.addEventListener('keyup', (event) => {
+            if (event.code === 'ArrowLeft') {
+                moveLeft = false;
+            } else if (event.code === 'ArrowRight') {
+                moveRight = false;
+            }
+        });
+
+        // Crear el campo de estrellas
+        const starGeometry = new THREE.BufferGeometry();
+        const starCount = 5000;
+        const starPositions = new Float32Array(starCount * 3); // Cada estrella tiene 3 coordenadas (x, y, z)
+
+        for (let i = 0; i < starCount * 3; i += 3) {
+            starPositions[i] = (Math.random() - 0.5) * 100; // Coordenada X aleatoria
+            starPositions[i + 1] = (Math.random() - 0.5) * 100; // Coordenada Y aleatoria
+            starPositions[i + 2] = (Math.random() - 0.5) * 300; // Coordenada Z aleatoria
+        }
+
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+
+        const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.2 });
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        // Crear meteoritos (bolas) con textura lunar
+        const meteorTexture = textureLoader.load('./luna.png');
+        const meteorMaterial = new THREE.MeshBasicMaterial({ map: meteorTexture });
+        const meteorGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const meteorites = [];
+
+        for (let i = 0; i < 10; i++) {
+            const meteor = new THREE.Mesh(meteorGeometry, meteorMaterial);
+            meteor.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10, -Math.random() * 100);
+            scene.add(meteor);
+            meteorites.push(meteor);
+        }
+
+        // Función para detectar colisiones
+        function checkCollision(meteor, model) {
+            const distance = meteor.position.distanceTo(model.position);
+            return distance < 1; // Si están cerca, se considera colisión
+        }
+
+        // Función para manejar "Game Over"
+        function gameOver() {
+            alert("Game Over! Puntuación: " + score.toFixed(3));
+            setTimeout(() => {
+                window.location.reload(); // Reiniciar el juego al cabo de 5 segundos
+            }, 5000);
+        }
+
+        // Animación
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Incrementar la puntuación con el tiempo en segundos y milisegundos
+            score += 0.01;
+            scoreDisplay.textContent = "Score: " + score.toFixed(3); // Mostrar en segundos con milisegundos
+
+            // Movimiento de la nave
+            if (model) {
+                if (moveLeft) {
+                    model.position.x -= speed;
+                } else if (moveRight) {
+                    model.position.x += speed;
+                }
+            }
+
+            // Movimiento de las estrellas (efecto de "ir hacia adelante")
+            stars.geometry.attributes.position.array.forEach((_, i) => {
+                if (i % 3 === 2) { // Z position
+                    stars.geometry.attributes.position.array[i] += 0.2;
+                    if (stars.geometry.attributes.position.array[i] > 100) {
+                        stars.geometry.attributes.position.array[i] = -200; // Reposiciona las estrellas
+                    }
+                }
+            });
+            stars.geometry.attributes.position.needsUpdate = true;
+
+            // Movimiento de los meteoritos y detección de colisiones
+            for (const meteor of meteorites) {
+                meteor.position.z += 0.3;
+                if (meteor.position.z > 5) {
+                    meteor.position.z = -100;
+                    meteor.position.x = (Math.random() - 0.5) * 10;
+                    meteor.position.y = (Math.random() - 0.5) * 10;
+                }
+
+                // Verificar colisión
+                if (model && checkCollision(meteor, model)) {
+                    gameOver();
+                    return; // Detener la animación si hay colisión
+                }
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Ajustar el tamaño del renderizador cuando se redimensiona la ventana
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>
